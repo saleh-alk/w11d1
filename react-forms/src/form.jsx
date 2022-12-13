@@ -3,11 +3,22 @@ import {useState} from "react"
 
 function Form(props) {
 
-    const [userRegistration, setUserRegistration] = useState({})
+    const [userRegistration, setUserRegistration] = useState({
+        name: "",
+        email: "",
+        phoneNumber: "", 
+        phoneType: "",
+        role: ""
 
-    const handleChange = (e) => {
-        setUserRegistration(e.target.value)
-        console.log("Event Target: " + e.target.value)
+    })
+
+    const handleChange = (key) => {
+        // setUserRegistration(e.target.value)
+        return (e)=> {
+            setUserRegistration( (user)=> ({...user, [key]: e.target.value}))
+
+        }
+        //console.log("Event Target: " + e.target.value)
     }
 
     const handleSubmit = (e) => {
@@ -16,11 +27,16 @@ function Form(props) {
         for (let i = 0; i < e.target.length; i++) {
             console.log(e.target[i].value)
         }
+        // if(!userRegistration.name){
+        //     console.error("No Name!")
+        // }
+        console.log("userRegistration: ")
+        console.log(userRegistration)
     }
 
     return(
         <form onSubmit={handleSubmit}>
-            <input onChange={handleChange} type="text" id="name" value={userRegistration.name} placeholder="Name"/>
+            <input onChange={handleChange("name")} type="text" id="name" value={userRegistration.name} placeholder="Name"/>
             <input onChange={handleChange} type="text" id="email" value={userRegistration.email}  placeholder="Email"/>
             <input onChange={handleChange} type="text" id="phoneNumber" value={userRegistration.phoneNumber} placeholder="(123) 456-7890"/>
 
