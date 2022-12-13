@@ -1,27 +1,50 @@
+import {useState} from "react"
 
 
 function Form(props) {
-    return(
-        <form>
-            <input type="text" id="name" value="name"/>
-            <input type="text" id="email" value="email"  />
-            <input type="text" id="phoneNumber" value="phoneNumber" />
 
-            <select id="phoneType" value="phoneType">
-                <option selected></option>
-                <option  value="mobile">mobile</option>
+    const [userRegistration, setUserRegistration] = useState({})
+
+    const handleChange = (e) => {
+        setUserRegistration(e.target.value)
+        console.log("Event Target: " + e.target.value)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+        // console.log(e.target[1].value)
+        for (let i = 0; i < e.target.length; i++) {
+            console.log(e.target[i].value)
+        }
+    }
+
+    return(
+        <form onSubmit={handleSubmit}>
+            <input onChange={handleChange} type="text" id="name" value={userRegistration.name} placeholder="Name"/>
+            <input onChange={handleChange} type="text" id="email" value={userRegistration.email}  placeholder="Email"/>
+            <input onChange={handleChange} type="text" id="phoneNumber" value={userRegistration.phoneNumber} placeholder="(123) 456-7890"/>
+
+            <select onChange={handleChange} id="phoneType" name="phoneType" placeholder="Phone Type">
+                <option value="" disabled selected>Phone Type</option>
+                <option value="mobile">mobile</option>
                 <option value="home">home</option>
                 <option value="work">work</option>
             </select>
 
             <label>Staff
-                <input type="radio" id="staff" value="staff"  />
+                <input  onChange={handleChange} type="radio" id="staff" name="role" value="staff"  />
             </label>
-            <label>
-            <input type="radio" id="student" value="student"/>
+            <label>Student
+                <input onChange={handleChange} type="radio" id="student" name="role" value="student"/>
             </label>
-            <textarea id="bio" >bio</textarea>
-            <input type="checkbox" id="emailNotifications" checked/>
+            <textarea onChange={handleChange} id="bio" placeholder="Describe who you are">
+            </textarea>
+
+            <label >Want email notifications?
+                <input type="checkbox" id="emailNotifications" checked/>
+            </label>
+
+            <button type="submit">Submit</button>
         </form>
     )
 }

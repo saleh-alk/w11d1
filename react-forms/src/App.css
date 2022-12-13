@@ -37,9 +37,19 @@
   }
 }
 
+body {
+  margin-left: 250px;
+}
 
 form{
   display: flex;
   flex-direction: column;
   width: 250px;
+}
+
+input, select, textarea {
+  padding-top: 5px;
+  padding-bottom: 5px;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
